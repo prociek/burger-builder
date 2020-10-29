@@ -12,8 +12,8 @@ const burgerIngredient = props => {
         case ('bread-top'):
             ingredient = (
                 <div className={classes.BreadTop}>
-                    <div className={classes.BreadSeeds1}></div>
-                    <div className={classes.BreadSeeds2}></div>
+                    <div className={classes.Seeds1}></div>
+                    <div className={classes.Seeds2}></div>
                 </div>
             );
             break;
