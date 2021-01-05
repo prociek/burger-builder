@@ -1,0 +1,18 @@
+.Order {
+  padding: 10px;
+  margin: 10px;
+  box-shadow: 0 3px 3px #ccc;
+  border: 1px solid #fff;
+}
+
+.Order div {
+  margin-bottom: 10px;
+}
+
+.Ingredient {
+  margin: 10px;
+  text-transform: capitalize;
+  display: inline-block;
+  border: 1px solid gray;
+  padding: 5px 10px;
+}
