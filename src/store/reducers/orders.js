@@ -17,7 +17,12 @@ const reducer = (state = initialState, action) => {
         ...action.orderData,
         id: action.id,
       };
-      return { ...state, orders: newOrder, loading: false, purchased: true };
+      return {
+        ...state,
+        orders: [...state.orders, newOrder],
+        loading: false,
+        purchased: true,
+      };
     case actionTypes.PURCHASE_BURGER_FAIL:
       return { ...state, loading: false };
     case actionTypes.FETCH_ORDERS_START:

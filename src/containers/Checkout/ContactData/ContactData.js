@@ -5,9 +5,9 @@ import axios from "../../../axios-orders";
 import Button from "../../../components/IU/Button/Button";
 import Spinner from "../../../components/IU/Spinner/Spinner";
 import Input from "../../../components/IU/Input/Input";
-
 import Classes from "./ContactData.module.css";
 import { purchaseBurger } from "../../../store/actions";
+import { checkValidation } from "../../../shared/utility";
 
 class ContactData extends React.Component {
   state = {
@@ -16,77 +16,78 @@ class ContactData extends React.Component {
         elementType: "input",
         elementConfig: {
           type: "text",
-          placeholder: "Your Name",
+          placeholder: "Your Name"
         },
         value: "",
         validation: {
           required: true,
-          minLength: 4,
+          minLength: 4
         },
         isValid: false,
-        touched: false,
+        touched: false
       },
       email: {
         elementType: "input",
         elementConfig: {
           type: "email",
-          placeholder: "Your E-mail",
+          placeholder: "Your E-mail"
         },
         value: "",
         validation: {
           required: true,
+          isEmail: true
         },
         isValid: false,
-        touched: false,
+        touched: false
       },
       street: {
         elementType: "input",
         elementConfig: {
           type: "text",
-          placeholder: "Your Street",
+          placeholder: "Your Street"
         },
         value: "",
         validation: {
-          required: true,
+          required: true
         },
         isValid: false,
-        touched: false,
+        touched: false
       },
       postal: {
         elementType: "input",
         elementConfig: {
           type: "text",
-          placeholder: "Your Postal",
+          placeholder: "Your Postal"
         },
         value: "",
         validation: {
           required: true,
           minLength: 5,
-          maxLength: 5,
+          maxLength: 5
         },
         isValid: false,
-        touched: false,
+        touched: false
       },
       deliveryMethod: {
         elementType: "select",
         elementConfig: {
           options: [
             { value: "fastest", display: "Fastest" },
-            { value: "cheepest", display: "Cheepest" },
-          ],
+            { value: "cheepest", display: "Cheepest" }
+          ]
         },
         value: "fastest",
         validation: {
-          required: true,
+          required: true
         },
         isValid: true,
-        touched: false,
-      },
+        touched: false
+      }
     },
-    formValid: false,
+    formValid: false
   };
 
-  handleOrder = (e) => {
+  handleOrder = e => {
     e.preventDefault();
     let orderData = {};
     for (let name in this.state.orderForm) {
@@ -96,19 +97,22 @@ class ContactData extends React.Component {
       ingredients: this.props.ingredients,
       price: this.props.price,
       date: new Date(),
-      orderData,
+      userId: this.props.userId,
+      orderData
     };
-    this.props.onPurchaseBurger(order);
+    this.props.onPurchaseBurger(order, this.props.token);
   };
 
-  onChangeHandler = (e) => {
-    const newInput = { ...this.state.orderForm[e.target.name] };
-    newInput.value = e.target.value;
-    newInput.isValid = this.checkValidation(
-      newInput.value,
-      newInput.validation
-    );
-    newInput.touched = true;
+  onChangeHandler = e => {
+    const newInput = {
+      ...this.state.orderForm[e.target.name],
+      value: e.target.value,
+      isValid: checkValidation(
+        e.target.value,
+        this.state.orderForm[e.target.name].validation
+      ),
+      touched: true
+    };
     const newState = { ...this.state.orderForm, [e.target.name]: newInput };
 
     let formValid = true;
@@ -118,27 +122,9 @@ class ContactData extends React.Component {
 
     this.setState({
       orderForm: newState,
-      formValid,
+      formValid
     });
   };
-
-  checkValidation(value, rules) {
-    let isValid = true;
-
-    if (rules.required) {
-      isValid = value.trim() !== "" && isValid;
-    }
-
-    if (rules.minLength) {
-      isValid = value.trim().length >= rules.minLength && isValid;
-    }
-
-    if (rules.maxLength) {
-      isValid = value.trim().length <= rules.maxLength && isValid;
-    }
-
-    return isValid;
-  }
 
   render() {
     let form = <Spinner />;
@@ -168,25 +154,28 @@ class ContactData extends React.Component {
       );
     }
     return (
-      <div className={Classes.ContactData}>
+      <section className={Classes.ContactData}>
         <h4>Enter your Contact Data</h4>
         {form}
-      </div>
+      </section>
     );
   }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
     ingredients: state.burger.ingredients,
     price: state.burger.totalPrice,
     loading: state.order.loading,
+    token: state.user.token,
+    userId: state.user.id
   };
 };
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = dispatch => {
   return {
-    onPurchaseBurger: (orderData) => dispatch(purchaseBurger(orderData)),
+    onPurchaseBurger: (orderData, token) =>
+      dispatch(purchaseBurger(orderData, token))
   };
 };
 

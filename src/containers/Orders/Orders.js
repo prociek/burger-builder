@@ -10,7 +10,7 @@ import classes from "./Orders.module.css";
 
 class Orders extends React.Component {
   componentDidMount() {
-    this.props.onFetchOrders();
+    this.props.onFetchOrders(this.props.token, this.props.userId);
   }
 
   render() {
@@ -19,7 +19,7 @@ class Orders extends React.Component {
     ) : (
       <section className={classes.Orders}>
         <h2>Your orders: </h2>
-        {this.props.orders.map((o) => (
+        {this.props.orders.map(o => (
           <Order key={o.id} {...o} />
         ))}
       </section>
@@ -27,16 +27,18 @@ class Orders extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
     orders: state.order.orders,
     loading: state.order.loading,
+    token: state.user.token,
+    userId: state.user.id
   };
 };
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = dispatch => {
   return {
-    onFetchOrders: () => dispatch(fetchOrders()),
+    onFetchOrders: (token, userId) => dispatch(fetchOrders(token, userId))
   };
 };
 
