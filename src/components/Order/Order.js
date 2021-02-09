@@ -2,7 +2,7 @@ import React from "react";
 
 import classes from "./Order.module.css";
 
-const order = ({ price, ingredients }) => {
+const Order = ({ price, ingredients }) => {
   const ingrList = [];
   for (let key in ingredients) {
     ingrList.push(
@@ -23,4 +23,4 @@ const order = ({ price, ingredients }) => {
   );
 };
 
-export default order;
+export default Order;
