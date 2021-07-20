@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Aux from "../Aux/Aux";
+import Aux from "../Auxiliary/Auxiliary";
 import Toolbar from "../../components/Navigation/Toolbar/Toolbar";
 import SideDrawer from "../../components/Navigation/SideDrawer/SideDrawer";
 

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from "react";
-import Aux from "../../hoc/Aux/Aux";
+import Aux from "../../hoc/Auxiliary/Auxiliary";
 import Burger from "../../components/Burger/Burger";
 import BuildControls from "../../components/Burger/BuildControls/BuildControls";
 import Modal from "../../components/IU/Modal/Modal";
@@ -23,9 +23,10 @@ export const BurgerBuilder = props => {
 
   const onAddIngredient = ingType => dispatch(addIngredient(ingType));
   const onRemoveIngredient = ingType => dispatch(removeIngredient(ingType));
-  const onInitIngredients = useCallback(() => dispatch(initIngredients()), [
-    dispatch
-  ]);
+  const onInitIngredients = useCallback(
+    () => dispatch(initIngredients()),
+    [dispatch]
+  );
   const onPurchaseInit = () => dispatch(purchaseInit());
   const onSetAuthRedirectPath = path => dispatch(setAuthRedirectPath(path));
 
