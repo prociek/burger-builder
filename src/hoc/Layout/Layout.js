@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Aux from "../Auxiliary/Auxiliary";
+import Auxiliary from "../Auxiliary/Auxiliary";
 import Toolbar from "../../components/Navigation/Toolbar/Toolbar";
 import SideDrawer from "../../components/Navigation/SideDrawer/SideDrawer";
 
@@ -17,11 +17,11 @@ const Layout = props => {
   };
 
   return (
-    <Aux>
+    <Auxiliary>
       <Toolbar clickedToggle={toggleSideDrawer} />
       <SideDrawer open={showSideDrawer} closed={closeSideDrawerHandler} />
       <main className={classes.Content}>{props.children}</main>
-    </Aux>
+    </Auxiliary>
   );
 };
 

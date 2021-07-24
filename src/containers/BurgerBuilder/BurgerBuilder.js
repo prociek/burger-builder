@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from "react";
-import Aux from "../../hoc/Auxiliary/Auxiliary";
+import Auxiliary from "../../hoc/Auxiliary/Auxiliary";
 import Burger from "../../components/Burger/Burger";
 import BuildControls from "../../components/Burger/BuildControls/BuildControls";
 import Modal from "../../components/IU/Modal/Modal";
@@ -76,7 +76,7 @@ export const BurgerBuilder = props => {
 
   if (ingredients) {
     burger = (
-      <Aux>
+      <Auxiliary>
         <Burger ingredients={ingredients} />
         <BuildControls
           ingredientAdded={onAddIngredient}
@@ -87,7 +87,7 @@ export const BurgerBuilder = props => {
           clicked={purchaseHandler}
           isAuth={isAuth}
         />
-      </Aux>
+      </Auxiliary>
     );
     orderSummary = (
       <OrderSummary
@@ -100,12 +100,12 @@ export const BurgerBuilder = props => {
   }
 
   return (
-    <Aux>
+    <Auxiliary>
       <Modal purchase={purchasing} modalClosed={purchaseCancellHandler}>
         {orderSummary}
       </Modal>
       {burger}
-    </Aux>
+    </Auxiliary>
   );
 };
 

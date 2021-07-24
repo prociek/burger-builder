@@ -1,12 +1,12 @@
 import React from "react";
-import Aux from "../../../hoc/Auxiliary/Auxiliary";
+import Auxiliary from "../../../hoc/Auxiliary/Auxiliary";
 import Backdrop from "../Backdrop/Backdrop";
 
 import classes from "./Modal.module.css";
 
 const Modal = React.memo(
   props => (
-    <Aux>
+    <Auxiliary>
       <Backdrop show={props.purchase} clicked={props.modalClosed} />
       <div
         className={classes.Modal}
@@ -17,7 +17,7 @@ const Modal = React.memo(
       >
         {props.children}
       </div>
-    </Aux>
+    </Auxiliary>
   ),
   (prevProps, nextProps) =>
     prevProps.purchase === nextProps.purchase &&
